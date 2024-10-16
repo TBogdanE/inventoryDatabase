@@ -69,3 +69,17 @@ body {
   width: 80%;
   margin: 0.2em;
 }
+
+#main-popup-sct {
+  grid-area: 3 / 7 / 8 / 30;
+  background-color: red;
+}
+
+#main-la-sct {
+  grid-area: 10 / 7 / 30 / 30;
+  border: 7px solid rgb(8, 82, 180);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
