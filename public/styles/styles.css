@@ -1,0 +1,71 @@
+body {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(30, 1fr);
+  background-color: rgb(209, 209, 209);
+  margin: 0;
+  height: 100vh;
+}
+
+#side-menu {
+  grid-area: 1 / 1 / 31 / 6;
+  background-color: rgb(8, 82, 180);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+}
+
+#side-menu-title {
+  grid-area: 1 / 1 / 2 / 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-family: sans-serif;
+  color: rgb(204, 204, 204);
+  font-weight: bold;
+}
+
+#side-menu-btn-sct {
+  grid-area: 3 / 1 / auto / 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.side-menu-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: rgb(204, 204, 204);
+  border: 3px solid rgb(204, 204, 204);
+  border-radius: 1em;
+  width: 80%;
+  margin: 0.2em;
+}
+
+#side-menu-btn-add-new {
+  grid-area: 6 / 1 / auto / 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#side-menu-btn-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: rgb(204, 204, 204);
+  background-color: rgb(9, 53, 104);
+  border: 3px solid rgb(204, 204, 204);
+  border-radius: 1em;
+  width: 80%;
+  margin: 0.2em;
+}
