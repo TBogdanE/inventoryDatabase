@@ -16,11 +16,56 @@
         <a href="/tablets" class="side-menu-btn"><p>Tablets</p></a>
       </div>
       <div id="side-menu-btn-add-new">
-        <a href="/addNewDevice" id="side-menu-btn-add"><p>Add Device</p></a>
+        <a href="/addNewData" id="side-menu-btn-add"><p>Add Device</p></a>
       </div>
     </div>
 
     <div id="main-popup-sct">UPCOMING</div>
-    <div id="main-la-sct"></div>
+    <div id="main-la-sct">
+      <% if (action === 'popup-menu' && dataType === 'brand-list') { %>
+      <form method="POST" action="/addNewData">
+        <label for="brand">Brand:</label>
+        <select name="brand" id="brand" required>
+          <% data.brands.forEach(element => { %>
+          <option value="<%= element.name %>"><%= element.name %></option>
+          <% }) %>
+        </select>
+
+        <label for="device_type">Device type:</label>
+        <select name="device_type" id="device_type" required>
+          <% data.deviceType.forEach(element => { %>
+          <option value="<%= element.type_name %>">
+            <%= element.type_name %>
+          </option>
+          <% }) %>
+        </select>
+
+        <label for="ramSize">RAM Size:</label>
+        <select name="ramSize" id="ramSize" required>
+          <% data.ramSize.forEach(element => { %>
+          <option value="<%= element.size %>"><%= element.size %></option>
+          <% }) %>
+        </select>
+
+        <label for="storageSize">Storage size:</label>
+        <select name="storageSize" id="storageSize" required>
+          <% data.storageSize.forEach(element => { %>
+          <option value="<%= element.size %>"><%= element.size %></option>
+          <% }) %>
+        </select>
+
+        <label for="screen_size">Screen size:</label>
+        <select name="screen_size" id="screen_size" required>
+          <% data.screenSize.forEach(element => { %>
+          <option value="<%= element.size %>"><%= element.size %></option>
+          <% }) %>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+      <% } else { %>
+      <p>Not available</p>
+      <% } %>
+    </div>
   </body>
 </html>
