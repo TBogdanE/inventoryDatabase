@@ -21,9 +21,13 @@
     </div>
 
     <div id="main-popup-sct">UPCOMING</div>
+
     <div id="main-la-sct">
       <% if (action === 'popup-menu' && dataType === 'brand-list') { %>
       <form method="POST" action="/addNewData">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
         <label for="brand">Brand:</label>
         <select name="brand" id="brand" required>
           <% data.brands.forEach(element => { %>
@@ -31,8 +35,8 @@
           <% }) %>
         </select>
 
-        <label for="device_type">Device type:</label>
-        <select name="device_type" id="device_type" required>
+        <label for="deviceType">Device type:</label>
+        <select name="deviceType" id="deviceType" required>
           <% data.deviceType.forEach(element => { %>
           <option value="<%= element.type_name %>">
             <%= element.type_name %>
@@ -54,8 +58,8 @@
           <% }) %>
         </select>
 
-        <label for="screen_size">Screen size:</label>
-        <select name="screen_size" id="screen_size" required>
+        <label for="screenSize">Screen size:</label>
+        <select name="screenSize" id="screenSize" required>
           <% data.screenSize.forEach(element => { %>
           <option value="<%= element.size %>"><%= element.size %></option>
           <% }) %>
