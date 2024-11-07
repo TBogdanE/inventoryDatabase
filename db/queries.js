@@ -1,6 +1,7 @@
 const { getAdapter } = require("axios");
 const pool = require("./pool");
 
+// we get the data, with which we build then the forms
 async function getDataForLists() {
   const brands = await pool.query("SELECT * FROM brands");
   const deviceType = await pool.query("SELECT * FROM device_type");
@@ -17,6 +18,7 @@ async function getDataForLists() {
   };
 }
 
+// get the id of each data, so we can point to it when we create a new device
 async function getIdsForDevice(
   brand,
   deviceType,
@@ -97,12 +99,18 @@ async function addDevice(
   console.log("Adding new device to database");
 
   try {
-    const query = `
-      INSERT INTO devices (name, brand_id, type_id, ram_id, storage_id, screen_size_id, count, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, 0, NOW()) 
-      RETURNING *;
+    // First, check if the device already exists
+    const checkQuery = `
+      SELECT * FROM devices
+      WHERE name = $1
+      AND brand_id = $2
+      AND type_id = $3
+      AND ram_id = $4
+      AND storage_id = $5
+      AND screen_size_id = $6;
     `;
-    const values = [
+
+    const checkValues = [
       name,
       brandId,
       deviceTypeId,
@@ -111,9 +119,60 @@ async function addDevice(
       screenSizeId,
     ];
 
-    const result = await pool.query(query, values);
-    console.log("Device added:", result.rows[0]);
-    return result.rows[0]; // Return the newly added device record
+    // Check if the device exists in the database
+    const existingDevice = await pool.query(checkQuery, checkValues);
+
+    // Print the existing device query result for debugging
+    console.log("Existing device:", existingDevice.rows);
+
+    if (existingDevice.rows.length > 0) {
+      // If the device exists, update the count
+      const updateQuery = `
+        UPDATE devices
+        SET count = count + 1
+        WHERE name = $1
+        AND brand_id = $2
+        AND type_id = $3
+        AND ram_id = $4
+        AND storage_id = $5
+        AND screen_size_id = $6
+        RETURNING *;
+      `;
+      const updateValues = [
+        name,
+        brandId,
+        deviceTypeId,
+        ramSizeId,
+        storageSizeId,
+        screenSizeId,
+      ];
+
+      const updatedDevice = await pool.query(updateQuery, updateValues);
+
+      // Print the updated device to ensure count is updated
+      console.log("Device count after update:", updatedDevice.rows);
+
+      return updatedDevice.rows[0]; // Return the updated device record
+    } else {
+      // If the device does not exist, insert it into the database
+      const insertQuery = `
+        INSERT INTO devices (name, brand_id, type_id, ram_id, storage_id, screen_size_id, count, created_at)
+        VALUES ($1, $2, $3, $4, $5, $6, 1, NOW())
+        RETURNING *;
+      `;
+      const insertValues = [
+        name,
+        brandId,
+        deviceTypeId,
+        ramSizeId,
+        storageSizeId,
+        screenSizeId,
+      ];
+
+      const result = await pool.query(insertQuery, insertValues);
+      console.log("Device added:", result.rows[0]);
+      return result.rows[0]; // Return the newly added device record
+    }
   } catch (error) {
     console.error("Error adding device:", error);
     throw error;
