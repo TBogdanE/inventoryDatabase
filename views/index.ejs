@@ -20,7 +20,17 @@
       </div>
     </div>
 
-    <div id="main-popup-sct">UPCOMING</div>
+    <div id="main-popup-sct">
+      <% if(dashboardNewData !== undefined) { %> <%
+      dashboardNewData.forEach(element => { %>
+      <div id="main-popup-box">
+        <div id="main-popup-box-title">
+          <p><%= element.brand_name %></p>
+        </div>
+        <div id="main-popup-box-text"><p><%= element.name %></p></div>
+      </div>
+      <% }) %> <% } %>
+    </div>
 
     <div id="main-la-sct">
       <% if (action === 'popup-menu' && dataType === 'brand-list') { %>

@@ -72,7 +72,31 @@ body {
 
 #main-popup-sct {
   grid-area: 3 / 7 / 8 / 30;
-  background-color: red;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  border: 7px solid rgb(8, 82, 180);
+  border-radius: 20px;
+}
+
+#main-popup-box {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  flex-direction: column;
+  border: 0.1em solid black;
+  height: 90%;
+  width: 5em;
+  margin: 0.5em;
+  border: 3px solid rgb(8, 82, 180);
+  border-radius: 10px;
+}
+
+#main-popup-box-title {
+}
+
+#main-popup-box-text {
 }
 
 #main-la-sct {

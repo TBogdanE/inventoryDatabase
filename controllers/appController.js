@@ -1,18 +1,22 @@
 const db = require("../db/queries");
 
-exports.displayIndex = (req, res) => {
-  res.render("index", { action: undefined });
+exports.displayIndex = async (req, res) => {
+  const newData = await db.getDevicesAddedToday();
+
+  const recievedData = newData || {};
+
+  res.render("index", { action: undefined, dashboardNewData: recievedData });
 };
 
 exports.getDataForUINewDevice = async (req, res) => {
   const data = await db.getDataForLists();
 
   const recievedData = data || {};
-
   res.render("index", {
     action: "popup-menu",
     dataType: "brand-list",
     data: recievedData,
+    dashboardNewData: undefined,
   });
 };
 

@@ -76,6 +76,18 @@ async function getIdsForDevice(
   }
 }
 
+async function getDevicesAddedToday() {
+  const data = await pool.query(`
+  SELECT devices.name, brands.name AS brand_name
+  FROM devices
+  JOIN brands ON devices.brand_id = brands.id
+  WHERE devices.created_at::date = CURRENT_DATE;
+`);
+
+  console.log("newdata", data.rows);
+  return data.rows;
+}
+
 async function getAllDevices() {
   console.log("Get all devices");
 }
@@ -190,6 +202,7 @@ async function deleteDevice() {
 module.exports = {
   getDataForLists,
   getIdsForDevice,
+  getDevicesAddedToday,
   getAllDevices,
   getTablets,
   getLaptops,
