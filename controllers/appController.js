@@ -51,3 +51,7 @@ exports.addNewDataToDB = async (req, res) => {
     res.status(500).send("An error occurred while adding the device.");
   }
 };
+
+exports.displayAllDevices = async (req, res) => {
+  const data = await db.getAllDevices();
+};

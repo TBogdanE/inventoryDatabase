@@ -89,7 +89,11 @@ async function getDevicesAddedToday() {
 }
 
 async function getAllDevices() {
-  console.log("Get all devices");
+  const data = await pool.query(
+    "SELECT devices.id, devices.name, brands.name AS brand_name, device_types.type_name AS device_type_name, ram_sizes.size AS ram_size, storage_sizes.size AS storage_size,screen_sizes.size AS screen_size,devices.count, devices.created_at FROM devices LEFT JOIN brands ON devices.brand_id = brands.id LEFT JOIN device_types ON devices.type_id = device_types.id LEFT JOIN ram_sizes ON devices.ram_id = ram_sizes.id LEFT JOIN storage_sizes ON devices.storage_id = storage_sizes.id LEFT JOIN screen_sizes ON devices.screen_size_id = screen_sizes.id;"
+  );
+  console.log("alllllllllllllllll:", data);
+  return data;
 }
 
 async function getTablets() {

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "sync": "browser-sync start --proxy 'localhost:3000' --files 'views/*.ejs, public/**/*.*'"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +13,11 @@
   "description": "",
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.3",
+    "nodemon": "^3.1.7"
   }
 }
